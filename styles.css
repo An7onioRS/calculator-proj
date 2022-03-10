@@ -9,3 +9,14 @@
     align-items: center;
     gap: 0.2rem;
 }
+
+.row-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content:space-around;
+    gap: 0.1rem;
+}
+
+button {
+    width: 2rem;
+}
