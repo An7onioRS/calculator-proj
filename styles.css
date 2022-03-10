@@ -1,0 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+.main-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.2rem;
+}
