@@ -11,11 +11,12 @@ function multiply(num1, num2) {
 }
 
 function divide(num1, num2) {
-    return num1 / num2;
+    return num1 % num2 === 0 ? num1 / num2 : num1 / num2.toFixed(2);
 }
 
-function operate(operator, num1, num2) {
-    let result;
+function calculate(operator, num1, num2) {
+    let result = 0;
+
     switch (operator) {
         case '+':
             result = sum(num1, num2);
@@ -23,16 +24,82 @@ function operate(operator, num1, num2) {
         case '-':
             result = subtract(num1, num2);
             break;
-        case '*':
+        case 'x':
             result = multiply(num1, num2);
             break;
-        case '/':
+        case '÷':
             result = divide(num1, num2);
             break;
         default:
             result = 'Invalid operator';
     };
     return result;
+}
+
+function operateOnEqualButton() {
+    num1 = parseInt(num1);
+    num2 = parseInt(num2);
+    displayValue.textContent = calculate(operator, num1, num2);
+    num1 = displayValue.textContent;
+    num2 = 0;
+    operator = '';
+}
+
+function operateOnClearButton() {
+    displayValue.textContent = "";
+    num1 = 0;
+    num2 = 0;
+    operator = '';  
+}
+    
+function operateOnOperator() {
+    if(!operator) { // if operator is falsy, then we just completed num1
+        operator = buttonInput;
+        displayValue.textContent += ' ' + operator + ' ';
+    }
+    else { 
+        if (!num2) // if there is no num2, then we are trying to change the operator after num1, therefore replace it with the new one
+        {
+            displayValue.textContent = displayValue.textContent.replace(operator, buttonInput);
+            operator = buttonInput;  
+        }
+        else { // if there is num2, then we are trying to make a new operation, therefore act as equal - take the result as num1 and add the new operator and wait for num2
+            displayValue.textContent = calculate(operator, num1, num2);
+            num1 = displayValue.textContent;
+            num2 = 0;
+            operator = buttonInput;
+            displayValue.textContent += ' ' + operator + ' ';
+        }
+    }
+}
+
+function operateOnNumber() {
+    if (!operator) { // if operator is empty, then we are still on num1
+        displayValue.textContent += buttonInput;
+        num1 += buttonInput;
+    }
+    else { // if operator is not empty, then we are ready to take in num2
+        displayValue.textContent += buttonInput; 
+        num2 += buttonInput;
+    }
+}
+
+function calculatorOperations(buttonInput, buttonClass) {
+
+    switch (buttonClass) {
+        case "number":
+            operateOnNumber(buttonInput);
+            break;
+        case "operator":
+            operateOnOperator(buttonInput);
+            break;
+        case "clear": 
+            operateOnClearButton(buttonInput);
+            break;
+        case "equal":
+            operateOnEqualButton(buttonInput);
+            break;
+    }
 }
 
 function addEventListenerList(list, event, fn) {
@@ -43,38 +110,14 @@ const displayValue = document.querySelector('.display-results');
 const buttons = document.querySelectorAll('button'); 
 let num1 = 0;
 let num2 = 0;
-let operator = '';
+let operator;
 let equal = false;
+let continueOperating = false
 
 addEventListenerList(buttons, "click", function(e) {
-    const input = e.target.textContent;
-
-    if (equal) displayValue.textContent = "";
-
-    switch (e.target.classList[0]) {
-        case "number":
-            if (!operator) {
-                displayValue.textContent += input;
-                num1 += input;
-            }
-            else {
-                displayValue.textContent += input;
-                num2 += input;
-            }
-            break;
-        case "operator":
-            displayValue.textContent += input;
-            operator = input;
-            break;
-        case "clear":
-            displayValue.textContent = "";
-            break;
-        case "equal":
-            num1 = parseInt(num1);
-            num2 = parseInt(num2);
-            displayValue.textContent = operate(operator, num1, num2);
-            equal = true;
-            break;
-    }
+    const buttonInput = e.target.textContent;
+    const buttonClass = e.target.classList[0];
+    
+    calculatorOperations(buttonInput, buttonClass);
 });
 
