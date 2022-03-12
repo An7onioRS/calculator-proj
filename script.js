@@ -53,15 +53,12 @@ function applyClearButton() {
 }
     
 function applyOperatorButton(buttonInput) {
-    if(!operator) { 
-        // if operator is falsy, num1 is completed
+    if (!operator) { 
         operator = buttonInput;
         displayValue.textContent += ' ' + operator + ' ';
     }
     else { 
-        // if it is not falsy, then we already have one calculation done
         if (!num2) { 
-        // if there is no num2, then the user is trying to change the operator after num1, therefore replace it with the new one
             displayValue.textContent = displayValue.textContent.replace(operator, buttonInput);
             operator = buttonInput;  
         }
@@ -87,7 +84,6 @@ function applyNumberButton(buttonInput) {
 }
 
 function decideButtonOperation(buttonInput, buttonClass) {
-
     switch (buttonClass) {
         case "number":
             applyNumberButton(buttonInput);
