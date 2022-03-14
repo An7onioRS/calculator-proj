@@ -62,8 +62,7 @@ function applyOperatorButton(buttonInput) {
             displayValue.textContent = displayValue.textContent.replace(operator, buttonInput);
             operator = buttonInput;  
         }
-        else { // if there is num2, then we are trying to make a new calculation, therefore act as equal,  and add the new operator and wait for num2
-            displayValue.textContent = calculate(operator, num1, num2);
+        else { 
             num1 = parseFloat(displayValue.textContent).toFixed(2);
             num2 = 0;
             operator = buttonInput;
