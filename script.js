@@ -34,14 +34,9 @@ function applyOperatorButton(buttonInput) {
 }
 
 function applyNumberButton(buttonInput) {
-    if (!operator) {
-        displayValue.textContent += buttonInput;
-        num1 += buttonInput;
-    }
-    else { 
-        displayValue.textContent += buttonInput; 
-        num2 += buttonInput;
-    }
+    displayValue.textContent += buttonInput;
+
+    !operator ? num1 += buttonInput : num2 += buttonInput;
 }
 
 function addEventListenerList(list, event, fn) {
