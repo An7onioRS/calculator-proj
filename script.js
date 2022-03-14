@@ -83,25 +83,6 @@ function applyNumberButton(buttonInput) {
     }
 }
 
-function decideButtonOperation(buttonInput, buttonClass) {
-    // i can make an object of key-value pairs where the key is the case and the value is the function that needs to be called => const buttonClassCases = { number: applyNumberButton)
-
-    // switch (buttonClass) {
-    //     case "number":
-    //         applyNumberButton(buttonInput);
-    //         break;
-    //     case "operator":
-    //         applyOperatorButton(buttonInput);
-    //         break;
-    //     case "clear": 
-    //         applyClearButton();
-    //         break;
-    //     case "equal":
-    //         applyEqualButton();
-    //         break;
-    // }
-}
-
 function addEventListenerList(list, event, fn) {
     list.forEach(button => button.addEventListener(event, fn));
 };
