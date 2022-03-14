@@ -34,11 +34,11 @@ function applyOperatorButton(buttonInput) {
 }
 
 function applyNumberButton(buttonInput) {
-    if (!operator) { // if operator is empty, then we are still on num1
+    if (!operator) {
         displayValue.textContent += buttonInput;
         num1 += buttonInput;
     }
-    else { // if operator is not empty, then we are ready to take in num2
+    else { 
         displayValue.textContent += buttonInput; 
         num2 += buttonInput;
     }
