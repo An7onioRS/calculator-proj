@@ -51,7 +51,9 @@ const operatorSigns = {
     '+': (num1, num2) => num1 + num2,
     '-': (num1, num2) => num1 - num2,
     'x': (num1, num2) => num1 * num2,
-    '÷': (num1, num2) => num1 % num2 === 0 ? num1 / num2 : (num1 / num2).toFixed(2)
+    '÷': (num1, num2) => (num2 === 0) 
+            ? 'Cannot divide by 0' 
+            : num1 % num2 === 0 ? num1 / num2 : (num1 / num2).toFixed(2)
 }; 
 const buttonTypes = {
     number: buttonInput => applyNumberButton(buttonInput),
