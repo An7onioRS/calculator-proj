@@ -16,21 +16,20 @@ function applyClearButton() {
     
 function applyOperatorButton(buttonInput) {
     if (!operator) { 
-        operator = buttonInput;
-        displayValue.textContent += ' ' + operator + ' ';
+        displayValue.textContent += ' ' + buttonInput + ' ';
     }
     else { 
         if (!num2) { 
-            displayValue.textContent = displayValue.textContent.replace(operator, buttonInput);
-            operator = buttonInput;  
+            displayValue.textContent = displayValue.textContent.replace(operator, buttonInput); 
         }
         else { 
             num1 = parseFloat(displayValue.textContent).toFixed(2);
             num2 = 0;
-            operator = buttonInput;
-            displayValue.textContent += ' ' + operator + ' ';
+            displayValue.textContent += ' ' + buttonInput + ' ';
         }
     }
+    
+    operator = buttonInput;
 }
 
 function applyNumberButton(buttonInput) {
