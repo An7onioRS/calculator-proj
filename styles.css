@@ -22,8 +22,8 @@ body {
 }
 
 .row-container {
-    height: 30px;
-    width: 100%;
+    height: 4rem;
+    width: 300px;
     display: flex;
     justify-content:space-around;
     gap: 0.1rem;
@@ -33,18 +33,20 @@ body {
     padding: 0.2rem;
     justify-content: flex-end;
     align-items: center;
+    font-size: 32px;
     border: 3px solid #818e94;
-    height: 40px;
+    height: 70px;
     color: #e8f8ff;
     background-color: #000000;
     background-image: linear-gradient(315deg, #000000 0%, #414141 74%); 
 }
 
 button {
-    width: 2rem;
+    font-size: 32px;
+    width: 100%;
     border-radius: 0.2rem;
 }
 
 button.clear {
-    font-size: 0.5rem;
+    font-size: 22px;
 }
