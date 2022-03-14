@@ -84,20 +84,22 @@ function applyNumberButton(buttonInput) {
 }
 
 function decideButtonOperation(buttonInput, buttonClass) {
-    switch (buttonClass) {
-        case "number":
-            applyNumberButton(buttonInput);
-            break;
-        case "operator":
-            applyOperatorButton(buttonInput);
-            break;
-        case "clear": 
-            applyClearButton();
-            break;
-        case "equal":
-            applyEqualButton();
-            break;
-    }
+    // i can make an object of key-value pairs where the key is the case and the value is the function that needs to be called => const buttonClassCases = { number: applyNumberButton)
+
+    // switch (buttonClass) {
+    //     case "number":
+    //         applyNumberButton(buttonInput);
+    //         break;
+    //     case "operator":
+    //         applyOperatorButton(buttonInput);
+    //         break;
+    //     case "clear": 
+    //         applyClearButton();
+    //         break;
+    //     case "equal":
+    //         applyEqualButton();
+    //         break;
+    // }
 }
 
 function addEventListenerList(list, event, fn) {
@@ -109,11 +111,22 @@ const buttons = document.querySelectorAll('button');
 let num1 = 0;
 let num2 = 0;
 let operator;
+const buttonClassCases = {
+    number: buttonInput => applyNumberButton(buttonInput),
+    operator: buttonInput => applyOperatorButton(buttonInput),
+    clear: applyClearButton,
+    equal: applyEqualButton
+}; 
 
 addEventListenerList(buttons, "click", function(e) {
     const buttonInput = e.target.textContent;
-    const buttonClass = e.target.classList[0];
-    
-    decideButtonOperation(buttonInput, buttonClass);
+    const buttonClass = e.target.classList[0];    
+
+    if (buttonClass === 'number' || buttonClass === 'operator') {
+        buttonClassCases[buttonClass](buttonInput);
+    }
+    else {
+        buttonClassCases[buttonClass]();
+    }
 });
 
