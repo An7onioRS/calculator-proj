@@ -1,45 +1,7 @@
-function sum(num1, num2) {
-    return num1 + num2;
-}
-
-function subtract(num1, num2) {
-    return num1 - num2;
-}
-
-function multiply(num1, num2) {
-    return num1 * num2;
-}
-
-function divide(num1, num2) {
-    return num1 % num2 === 0 ? num1 / num2 : (num1 / num2).toFixed(2);
-}
-
-function calculate(operator, num1, num2) {
-    let result = 0;
-
-    switch (operator) {
-        case '+':
-            result = sum(num1, num2);
-            break;
-        case '-':
-            result = subtract(num1, num2);
-            break;
-        case 'x':
-            result = multiply(num1, num2);
-            break;
-        case '÷':
-            result = divide(num1, num2);
-            break;
-        default:
-            result = 'Invalid operator';
-    };
-    return result;
-}   
-
 function applyEqualButton() {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
-    displayValue.textContent = calculate(operator, num1, num2);
+    displayValue.textContent = operatorSignObj[operator](num1, num2);
     num1 = parseFloat(displayValue.textContent).toFixed(2);
     num2 = 0;
     operator = '';
@@ -91,7 +53,21 @@ const buttons = document.querySelectorAll('button');
 let num1 = 0;
 let num2 = 0;
 let operator;
-const buttonClassCases = {
+const operatorSignObj = {
+    '+': (num1, num2) => {
+        return num1 + num2;
+    },
+    '-': (num1, num2) => {
+        return num1 - num2;
+    },
+    'x': (num1, num2) => {
+        return num1 * num2;
+    },
+    '÷': (num1, num2) => {
+        return num1 % num2 === 0 ? num1 / num2 : (num1 / num2).toFixed(2);
+    }
+}; 
+const buttonTypeObj = {
     number: buttonInput => applyNumberButton(buttonInput),
     operator: buttonInput => applyOperatorButton(buttonInput),
     clear: applyClearButton,
@@ -102,11 +78,7 @@ addEventListenerList(buttons, "click", function(e) {
     const buttonInput = e.target.textContent;
     const buttonClass = e.target.classList[0];    
 
-    if (buttonClass === 'number' || buttonClass === 'operator') {
-        buttonClassCases[buttonClass](buttonInput);
-    }
-    else {
-        buttonClassCases[buttonClass]();
-    }
+    if (buttonClass === 'number' || buttonClass === 'operator') buttonTypeObj[buttonClass](buttonInput);
+    buttonTypeObj[buttonClass]();
 });
 
