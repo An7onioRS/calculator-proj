@@ -1,7 +1,7 @@
 function applyEqualButton() {
     num1 = parseFloat(num1);
     num2 = parseFloat(num2);
-    displayValue.textContent = operatorSignObj[operator](num1, num2);
+    displayValue.textContent = operatorSigns[operator](num1, num2);
     num1 = parseFloat(displayValue.textContent).toFixed(2);
     num2 = 0;
     operator = '';
@@ -53,13 +53,21 @@ const buttons = document.querySelectorAll('button');
 let num1 = 0;
 let num2 = 0;
 let operator;
-const operatorSignObj = {
-    '+': (num1, num2) => num1 + num2,
-    '-': (num1, num2) => num1 - num2,
-    'x': (num1, num2) => num1 * num2,
-    '÷': (num1, num2) => num1 % num2 === 0 ? num1 / num2 : (num1 / num2).toFixed(2)
+const operatorSigns = {
+    '+': (num1, num2) => {
+        return num1 + num2;
+    },
+    '-': (num1, num2) => {
+        return num1 - num2;
+    },
+    'x': (num1, num2) => {
+        return num1 * num2;
+    },
+    '÷': (num1, num2) => {
+        return num1 % num2 === 0 ? num1 / num2 : (num1 / num2).toFixed(2);
+    }
 }; 
-const buttonTypeObj = {
+const buttonTypes = {
     number: buttonInput => applyNumberButton(buttonInput),
     operator: buttonInput => applyOperatorButton(buttonInput),
     clear: applyClearButton,
@@ -70,7 +78,8 @@ addEventListenerList(buttons, "click", function(e) {
     const buttonInput = e.target.textContent;
     const buttonClass = e.target.classList[0];    
 
-    if (buttonClass === 'number' || buttonClass === 'operator') buttonTypeObj[buttonClass](buttonInput);
-    buttonTypeObj[buttonClass]();
+    (buttonClass === 'number' || buttonClass === 'operator') 
+        ? buttonTypes[buttonClass](buttonInput) 
+        : buttonTypes[buttonClass]();
 });
 
